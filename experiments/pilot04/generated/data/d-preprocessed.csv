@@ -1,0 +1,169 @@
+"","time","age","gender","education","party","wom.refugees","wom.headscarf","wom.citizenship","wom.islam","wom.asylum","comment","list","subj","item","rating"
+"1","2022/05/11 10:05:39 AM GMT+2",29,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"1",1,"control.c",4
+"2","2022/05/11 10:05:39 AM GMT+2",29,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"1",1,"control.nc",2
+"3","2022/05/11 10:05:39 AM GMT+2",29,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"1",1,"Kampf für Deutschland",3
+"4","2022/05/11 10:15:56 AM GMT+2",38,"weiblich","Realschule","Grüne","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Neutral",NA,"1",2,"control.c",4
+"5","2022/05/11 10:15:56 AM GMT+2",38,"weiblich","Realschule","Grüne","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Neutral",NA,"1",2,"control.nc",1
+"6","2022/05/11 10:15:56 AM GMT+2",38,"weiblich","Realschule","Grüne","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Neutral",NA,"1",2,"Kampf für Deutschland",2
+"7","2022/05/11 10:17:04 AM GMT+2",20,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme zu",NA,"1",3,"control.c",4
+"8","2022/05/11 10:17:04 AM GMT+2",20,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme zu",NA,"1",3,"control.nc",2
+"9","2022/05/11 10:17:04 AM GMT+2",20,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme zu",NA,"1",3,"Kampf für Deutschland",2
+"10","2022/05/11 10:21:13 AM GMT+2",21,"männlich","Abitur","keine Angabe","Neutral","Neutral","Ich stimme zu","Neutral","Ich stimme zu",NA,"1",5,"control.c",4
+"11","2022/05/11 10:21:13 AM GMT+2",21,"männlich","Abitur","keine Angabe","Neutral","Neutral","Ich stimme zu","Neutral","Ich stimme zu",NA,"1",5,"control.nc",1
+"12","2022/05/11 10:21:13 AM GMT+2",21,"männlich","Abitur","keine Angabe","Neutral","Neutral","Ich stimme zu","Neutral","Ich stimme zu",NA,"1",5,"Kampf für Deutschland",3
+"13","2022/05/11 10:21:36 AM GMT+2",30,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"1",6,"control.c",4
+"14","2022/05/11 10:21:36 AM GMT+2",30,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"1",6,"control.nc",1
+"15","2022/05/11 10:21:36 AM GMT+2",30,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"1",6,"Kampf für Deutschland",2
+"16","2022/05/11 10:22:17 AM GMT+2",25,"männlich","Realschule","Die Partei","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",7,"control.c",5
+"17","2022/05/11 10:22:17 AM GMT+2",25,"männlich","Realschule","Die Partei","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",7,"control.nc",1
+"18","2022/05/11 10:22:17 AM GMT+2",25,"männlich","Realschule","Die Partei","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",7,"Kampf für Deutschland",1
+"19","2022/05/11 1:15:38 PM GMT+2",35,"männlich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",9,"control.c",4
+"20","2022/05/11 1:15:38 PM GMT+2",35,"männlich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",9,"control.nc",2
+"21","2022/05/11 1:15:38 PM GMT+2",35,"männlich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",9,"Kampf für Deutschland",3
+"22","2022/05/11 1:15:40 PM GMT+2",22,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",10,"control.c",4
+"23","2022/05/11 1:15:40 PM GMT+2",22,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",10,"control.nc",2
+"24","2022/05/11 1:15:40 PM GMT+2",22,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",10,"Kampf für Deutschland",3
+"25","2022/05/11 1:15:41 PM GMT+2",24,"weiblich","Studium","Linke","Neutral","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"1",11,"control.c",5
+"26","2022/05/11 1:15:41 PM GMT+2",24,"weiblich","Studium","Linke","Neutral","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"1",11,"control.nc",1
+"27","2022/05/11 1:15:41 PM GMT+2",24,"weiblich","Studium","Linke","Neutral","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"1",11,"Kampf für Deutschland",1
+"28","2022/05/11 1:16:14 PM GMT+2",27,"weiblich","Realschule","Linke","Ich stimme nicht zu","Neutral","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",12,"control.c",5
+"29","2022/05/11 1:16:14 PM GMT+2",27,"weiblich","Realschule","Linke","Ich stimme nicht zu","Neutral","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",12,"control.nc",1
+"30","2022/05/11 1:16:14 PM GMT+2",27,"weiblich","Realschule","Linke","Ich stimme nicht zu","Neutral","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",12,"Kampf für Deutschland",2
+"31","2022/05/11 1:16:26 PM GMT+2",52,"männlich","Realschule","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",13,"control.c",5
+"32","2022/05/11 1:16:26 PM GMT+2",52,"männlich","Realschule","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",13,"control.nc",1
+"33","2022/05/11 1:16:26 PM GMT+2",52,"männlich","Realschule","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",13,"Kampf für Deutschland",3
+"34","2022/05/11 1:16:32 PM GMT+2",32,"männlich","Abitur","Grüne","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",14,"control.c",5
+"35","2022/05/11 1:16:32 PM GMT+2",32,"männlich","Abitur","Grüne","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",14,"control.nc",1
+"36","2022/05/11 1:16:32 PM GMT+2",32,"männlich","Abitur","Grüne","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",14,"Kampf für Deutschland",2
+"37","2022/05/11 1:16:37 PM GMT+2",34,"männlich","Studium","CDU","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu",NA,"1",15,"control.c",5
+"38","2022/05/11 1:16:37 PM GMT+2",34,"männlich","Studium","CDU","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu",NA,"1",15,"control.nc",2
+"39","2022/05/11 1:16:37 PM GMT+2",34,"männlich","Studium","CDU","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu",NA,"1",15,"Kampf für Deutschland",2
+"40","2022/05/11 1:16:39 PM GMT+2",24,"männlich","Studium","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",16,"control.c",5
+"41","2022/05/11 1:16:39 PM GMT+2",24,"männlich","Studium","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",16,"control.nc",2
+"42","2022/05/11 1:16:39 PM GMT+2",24,"männlich","Studium","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"1",16,"Kampf für Deutschland",5
+"43","2022/05/11 1:18:35 PM GMT+2",46,"weiblich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Neutral","Neutral",NA,"1",20,"control.c",5
+"44","2022/05/11 1:18:35 PM GMT+2",46,"weiblich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Neutral","Neutral",NA,"1",20,"control.nc",1
+"45","2022/05/11 1:18:35 PM GMT+2",46,"weiblich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Neutral","Neutral",NA,"1",20,"Kampf für Deutschland",3
+"46","2022/05/11 1:19:37 PM GMT+2",23,"männlich","Abitur","FDP","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"1",21,"control.c",4
+"47","2022/05/11 1:19:37 PM GMT+2",23,"männlich","Abitur","FDP","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"1",21,"control.nc",2
+"48","2022/05/11 1:19:37 PM GMT+2",23,"männlich","Abitur","FDP","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"1",21,"Kampf für Deutschland",1
+"49","2022/05/11 1:36:44 PM GMT+2",30,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",23,"control.c",5
+"50","2022/05/11 1:36:44 PM GMT+2",30,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",23,"control.nc",2
+"51","2022/05/11 1:36:44 PM GMT+2",30,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"1",23,"Kampf für Deutschland",2
+"52","2022/05/12 8:57:25 AM GMT+2",23,"männlich","Hauptschule","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Neutral","Neutral",NA,"2",24,"control.c",5
+"53","2022/05/12 8:57:25 AM GMT+2",23,"männlich","Hauptschule","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Neutral","Neutral",NA,"2",24,"control.nc",2
+"54","2022/05/12 8:57:25 AM GMT+2",23,"männlich","Hauptschule","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Neutral","Neutral",NA,"2",24,"Hilfe vor Ort",4
+"55","2022/05/12 9:04:49 AM GMT+2",41,"männlich","Abitur","Die Humanisten","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Neutral","Neutral",NA,"2",25,"control.c",5
+"56","2022/05/12 9:04:49 AM GMT+2",41,"männlich","Abitur","Die Humanisten","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Neutral","Neutral",NA,"2",25,"control.nc",1
+"57","2022/05/12 9:04:49 AM GMT+2",41,"männlich","Abitur","Die Humanisten","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Neutral","Neutral",NA,"2",25,"Hilfe vor Ort",3
+"58","2022/05/12 9:07:41 AM GMT+2",26,"weiblich","Studium","SPD","Neutral","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Ich stimme zu",NA,"2",26,"control.c",4
+"59","2022/05/12 9:07:41 AM GMT+2",26,"weiblich","Studium","SPD","Neutral","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Ich stimme zu",NA,"2",26,"control.nc",1
+"60","2022/05/12 9:07:41 AM GMT+2",26,"weiblich","Studium","SPD","Neutral","Ich stimme nicht zu","Ich stimme nicht zu","Neutral","Ich stimme zu",NA,"2",26,"Hilfe vor Ort",4
+"61","2022/05/12 9:09:07 AM GMT+2",49,"männlich","Studium","die basis","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",27,"control.c",5
+"62","2022/05/12 9:09:07 AM GMT+2",49,"männlich","Studium","die basis","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",27,"control.nc",1
+"63","2022/05/12 9:09:07 AM GMT+2",49,"männlich","Studium","die basis","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",27,"Hilfe vor Ort",1
+"64","2022/05/12 9:15:23 AM GMT+2",46,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","VIel Erfolg!","2",29,"control.c",4
+"65","2022/05/12 9:15:23 AM GMT+2",46,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","VIel Erfolg!","2",29,"control.nc",2
+"66","2022/05/12 9:15:23 AM GMT+2",46,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","VIel Erfolg!","2",29,"Hilfe vor Ort",4
+"67","2022/05/12 9:18:34 AM GMT+2",23,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",31,"control.c",5
+"68","2022/05/12 9:18:34 AM GMT+2",23,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",31,"control.nc",1
+"69","2022/05/12 9:18:34 AM GMT+2",23,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",31,"Hilfe vor Ort",3
+"70","2022/05/12 9:20:16 AM GMT+2",19,"männlich","Abitur","Volt","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",32,"control.c",4
+"71","2022/05/12 9:20:16 AM GMT+2",19,"männlich","Abitur","Volt","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",32,"control.nc",2
+"72","2022/05/12 9:20:16 AM GMT+2",19,"männlich","Abitur","Volt","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",32,"Hilfe vor Ort",4
+"73","2022/05/12 9:22:53 AM GMT+2",25,"weiblich","Abitur","FDP","Ich stimme zu","Ich stimme zu","Neutral","Neutral","Ich stimme zu",NA,"2",34,"control.c",4
+"74","2022/05/12 9:22:53 AM GMT+2",25,"weiblich","Abitur","FDP","Ich stimme zu","Ich stimme zu","Neutral","Neutral","Ich stimme zu",NA,"2",34,"control.nc",2
+"75","2022/05/12 9:22:53 AM GMT+2",25,"weiblich","Abitur","FDP","Ich stimme zu","Ich stimme zu","Neutral","Neutral","Ich stimme zu",NA,"2",34,"Hilfe vor Ort",1
+"76","2022/05/12 9:24:31 AM GMT+2",26,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral",NA,"2",35,"control.c",5
+"77","2022/05/12 9:24:31 AM GMT+2",26,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral",NA,"2",35,"control.nc",2
+"78","2022/05/12 9:24:31 AM GMT+2",26,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral",NA,"2",35,"Hilfe vor Ort",1
+"79","2022/05/12 9:24:35 AM GMT+2",18,"weiblich","Abitur","FDP","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"2",36,"control.c",5
+"80","2022/05/12 9:24:35 AM GMT+2",18,"weiblich","Abitur","FDP","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"2",36,"control.nc",1
+"81","2022/05/12 9:24:35 AM GMT+2",18,"weiblich","Abitur","FDP","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral","Ich stimme nicht zu",NA,"2",36,"Hilfe vor Ort",1
+"82","2022/05/12 9:26:03 AM GMT+2",24,"männlich","Abitur","keine Angabe","Neutral","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral",NA,"2",37,"control.c",5
+"83","2022/05/12 9:26:03 AM GMT+2",24,"männlich","Abitur","keine Angabe","Neutral","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral",NA,"2",37,"control.nc",2
+"84","2022/05/12 9:26:03 AM GMT+2",24,"männlich","Abitur","keine Angabe","Neutral","Ich stimme nicht zu","Ich stimme zu","Neutral","Neutral",NA,"2",37,"Hilfe vor Ort",2
+"85","2022/05/12 9:26:13 AM GMT+2",24,"weiblich","Realschule","Grüne","Neutral","Ich stimme zu","Neutral","Ich stimme zu","Neutral",NA,"2",38,"control.c",4
+"86","2022/05/12 9:26:13 AM GMT+2",24,"weiblich","Realschule","Grüne","Neutral","Ich stimme zu","Neutral","Ich stimme zu","Neutral",NA,"2",38,"control.nc",2
+"87","2022/05/12 9:26:13 AM GMT+2",24,"weiblich","Realschule","Grüne","Neutral","Ich stimme zu","Neutral","Ich stimme zu","Neutral",NA,"2",38,"Hilfe vor Ort",3
+"88","2022/05/12 9:28:24 AM GMT+2",22,"männlich","Abitur","AfD","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",39,"control.c",4
+"89","2022/05/12 9:28:24 AM GMT+2",22,"männlich","Abitur","AfD","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",39,"control.nc",1
+"90","2022/05/12 9:28:24 AM GMT+2",22,"männlich","Abitur","AfD","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",39,"Hilfe vor Ort",1
+"91","2022/05/12 9:28:51 AM GMT+2",29,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",40,"control.c",5
+"92","2022/05/12 9:28:51 AM GMT+2",29,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",40,"control.nc",1
+"93","2022/05/12 9:28:51 AM GMT+2",29,"männlich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",40,"Hilfe vor Ort",4
+"94","2022/05/12 9:29:34 AM GMT+2",32,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"2",41,"control.c",5
+"95","2022/05/12 9:29:34 AM GMT+2",32,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"2",41,"control.nc",1
+"96","2022/05/12 9:29:34 AM GMT+2",32,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"2",41,"Hilfe vor Ort",2
+"97","2022/05/12 9:31:34 AM GMT+2",18,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",42,"control.c",5
+"98","2022/05/12 9:31:34 AM GMT+2",18,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",42,"control.nc",2
+"99","2022/05/12 9:31:34 AM GMT+2",18,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",42,"Hilfe vor Ort",5
+"100","2022/05/12 9:31:55 AM GMT+2",25,"weiblich","Studium","SPD","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",43,"control.c",5
+"101","2022/05/12 9:31:55 AM GMT+2",25,"weiblich","Studium","SPD","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",43,"control.nc",1
+"102","2022/05/12 9:31:55 AM GMT+2",25,"weiblich","Studium","SPD","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme zu",NA,"2",43,"Hilfe vor Ort",1
+"103","2022/05/12 9:32:25 AM GMT+2",35,"männlich","Studium","SPD","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",44,"control.c",4
+"104","2022/05/12 9:32:25 AM GMT+2",35,"männlich","Studium","SPD","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",44,"control.nc",1
+"105","2022/05/12 9:32:25 AM GMT+2",35,"männlich","Studium","SPD","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",44,"Hilfe vor Ort",1
+"106","2022/05/12 9:33:33 AM GMT+2",36,"weiblich","Studium","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",45,"control.c",5
+"107","2022/05/12 9:33:33 AM GMT+2",36,"weiblich","Studium","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",45,"control.nc",1
+"108","2022/05/12 9:33:33 AM GMT+2",36,"weiblich","Studium","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"2",45,"Hilfe vor Ort",2
+"109","2022/05/12 9:33:41 AM GMT+2",27,"männlich","Studium","SPD","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"2",46,"control.c",5
+"110","2022/05/12 9:33:41 AM GMT+2",27,"männlich","Studium","SPD","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"2",46,"control.nc",1
+"111","2022/05/12 9:33:41 AM GMT+2",27,"männlich","Studium","SPD","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Neutral",NA,"2",46,"Hilfe vor Ort",2
+"112","2022/05/12 9:51:43 AM GMT+2",21,"weiblich","Realschule","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",49,"control.c",4
+"113","2022/05/12 9:51:43 AM GMT+2",21,"weiblich","Realschule","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",49,"control.nc",2
+"114","2022/05/12 9:51:43 AM GMT+2",21,"weiblich","Realschule","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",49,"deutsches Staatsvolk",3
+"115","2022/05/12 10:02:49 AM GMT+2",37,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",52,"control.c",5
+"116","2022/05/12 10:02:49 AM GMT+2",37,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",52,"control.nc",1
+"117","2022/05/12 10:02:49 AM GMT+2",37,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",52,"deutsches Staatsvolk",1
+"118","2022/05/12 10:09:48 AM GMT+2",21,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",53,"control.c",5
+"119","2022/05/12 10:09:48 AM GMT+2",21,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",53,"control.nc",1
+"120","2022/05/12 10:09:48 AM GMT+2",21,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",53,"deutsches Staatsvolk",3
+"121","2022/05/12 10:13:59 AM GMT+2",47,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Neutral","Ich stimme nicht zu","Neutral","Ich stimme zu",NA,"3",55,"control.c",5
+"122","2022/05/12 10:13:59 AM GMT+2",47,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Neutral","Ich stimme nicht zu","Neutral","Ich stimme zu",NA,"3",55,"control.nc",1
+"123","2022/05/12 10:13:59 AM GMT+2",47,"männlich","Abitur","keine Angabe","Ich stimme nicht zu","Neutral","Ich stimme nicht zu","Neutral","Ich stimme zu",NA,"3",55,"deutsches Staatsvolk",1
+"124","2022/05/12 10:20:26 AM GMT+2",22,"weiblich","Abitur","SPD","Neutral","Neutral","Neutral","Ich stimme nicht zu","Neutral",NA,"3",56,"control.c",5
+"125","2022/05/12 10:20:26 AM GMT+2",22,"weiblich","Abitur","SPD","Neutral","Neutral","Neutral","Ich stimme nicht zu","Neutral",NA,"3",56,"control.nc",1
+"126","2022/05/12 10:20:26 AM GMT+2",22,"weiblich","Abitur","SPD","Neutral","Neutral","Neutral","Ich stimme nicht zu","Neutral",NA,"3",56,"deutsches Staatsvolk",1
+"127","2022/05/12 10:20:55 AM GMT+2",27,"männlich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",57,"control.c",4
+"128","2022/05/12 10:20:55 AM GMT+2",27,"männlich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",57,"control.nc",2
+"129","2022/05/12 10:20:55 AM GMT+2",27,"männlich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",57,"deutsches Staatsvolk",2
+"130","2022/05/12 10:23:32 AM GMT+2",23,"weiblich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",58,"control.c",5
+"131","2022/05/12 10:23:32 AM GMT+2",23,"weiblich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",58,"control.nc",2
+"132","2022/05/12 10:23:32 AM GMT+2",23,"weiblich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Neutral","Ich stimme nicht zu",NA,"3",58,"deutsches Staatsvolk",3
+"133","2022/05/12 10:23:43 AM GMT+2",22,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"3",59,"control.c",5
+"134","2022/05/12 10:23:43 AM GMT+2",22,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"3",59,"control.nc",1
+"135","2022/05/12 10:23:43 AM GMT+2",22,"weiblich","Abitur","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"3",59,"deutsches Staatsvolk",4
+"136","2022/05/12 10:25:34 AM GMT+2",27,"männlich","Realschule","FDP","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu",NA,"3",60,"control.c",4
+"137","2022/05/12 10:25:34 AM GMT+2",27,"männlich","Realschule","FDP","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu",NA,"3",60,"control.nc",2
+"138","2022/05/12 10:25:34 AM GMT+2",27,"männlich","Realschule","FDP","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu","Ich stimme nicht zu",NA,"3",60,"deutsches Staatsvolk",1
+"139","2022/05/12 10:31:40 AM GMT+2",34,"männlich","Studium","keine Angabe","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"3",62,"control.c",5
+"140","2022/05/12 10:31:40 AM GMT+2",34,"männlich","Studium","keine Angabe","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"3",62,"control.nc",1
+"141","2022/05/12 10:31:40 AM GMT+2",34,"männlich","Studium","keine Angabe","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Neutral","Neutral",NA,"3",62,"deutsches Staatsvolk",2
+"142","2022/05/12 10:33:17 AM GMT+2",37,"weiblich","Abitur","SPD","Neutral","Ich stimme nicht zu","Neutral","Neutral","Ich stimme zu",NA,"3",63,"control.c",5
+"143","2022/05/12 10:33:17 AM GMT+2",37,"weiblich","Abitur","SPD","Neutral","Ich stimme nicht zu","Neutral","Neutral","Ich stimme zu",NA,"3",63,"control.nc",2
+"144","2022/05/12 10:33:17 AM GMT+2",37,"weiblich","Abitur","SPD","Neutral","Ich stimme nicht zu","Neutral","Neutral","Ich stimme zu",NA,"3",63,"deutsches Staatsvolk",4
+"145","2022/05/12 10:33:29 AM GMT+2",33,"männlich","Abitur","keine Angabe","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme zu",NA,"3",64,"control.c",4
+"146","2022/05/12 10:33:29 AM GMT+2",33,"männlich","Abitur","keine Angabe","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme zu",NA,"3",64,"control.nc",1
+"147","2022/05/12 10:33:29 AM GMT+2",33,"männlich","Abitur","keine Angabe","Neutral","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme zu",NA,"3",64,"deutsches Staatsvolk",1
+"148","2022/05/12 10:33:47 AM GMT+2",34,"weiblich","Studium","Die Partei","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme zu","Ich stimme nicht zu",NA,"3",65,"control.c",5
+"149","2022/05/12 10:33:47 AM GMT+2",34,"weiblich","Studium","Die Partei","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme zu","Ich stimme nicht zu",NA,"3",65,"control.nc",1
+"150","2022/05/12 10:33:47 AM GMT+2",34,"weiblich","Studium","Die Partei","Ich stimme nicht zu","Ich stimme zu","Neutral","Ich stimme zu","Ich stimme nicht zu",NA,"3",65,"deutsches Staatsvolk",2
+"151","2022/05/12 10:34:47 AM GMT+2",22,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",66,"control.c",4
+"152","2022/05/12 10:34:47 AM GMT+2",22,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",66,"control.nc",2
+"153","2022/05/12 10:34:47 AM GMT+2",22,"weiblich","Abitur","Linke","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",66,"deutsches Staatsvolk",1
+"154","2022/05/12 10:35:02 AM GMT+2",37,"männlich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Ich stimme zu","Neutral",NA,"3",67,"control.c",5
+"155","2022/05/12 10:35:02 AM GMT+2",37,"männlich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Ich stimme zu","Neutral",NA,"3",67,"control.nc",2
+"156","2022/05/12 10:35:02 AM GMT+2",37,"männlich","Studium","Grüne","Ich stimme nicht zu","Neutral","Ich stimme zu","Ich stimme zu","Neutral",NA,"3",67,"deutsches Staatsvolk",1
+"157","2022/05/12 10:36:57 AM GMT+2",34,"männlich","Studium","CDU","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Neutral",NA,"3",68,"control.c",4
+"158","2022/05/12 10:36:57 AM GMT+2",34,"männlich","Studium","CDU","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Neutral",NA,"3",68,"control.nc",2
+"159","2022/05/12 10:36:57 AM GMT+2",34,"männlich","Studium","CDU","Ich stimme nicht zu","Ich stimme nicht zu","Ich stimme zu","Ich stimme nicht zu","Neutral",NA,"3",68,"deutsches Staatsvolk",2
+"160","2022/05/12 10:37:31 AM GMT+2",31,"männlich","Studium","SPD","Neutral","Neutral","Ich stimme nicht zu","Neutral","Neutral",NA,"3",69,"control.c",5
+"161","2022/05/12 10:37:31 AM GMT+2",31,"männlich","Studium","SPD","Neutral","Neutral","Ich stimme nicht zu","Neutral","Neutral",NA,"3",69,"control.nc",2
+"162","2022/05/12 10:37:31 AM GMT+2",31,"männlich","Studium","SPD","Neutral","Neutral","Ich stimme nicht zu","Neutral","Neutral",NA,"3",69,"deutsches Staatsvolk",1
+"163","2022/05/12 10:38:34 AM GMT+2",31,"männlich","Studium","SPD","Neutral","Neutral","Ich stimme nicht zu","Neutral","Neutral",NA,"3",70,"control.c",5
+"164","2022/05/12 10:38:34 AM GMT+2",31,"männlich","Studium","SPD","Neutral","Neutral","Ich stimme nicht zu","Neutral","Neutral",NA,"3",70,"control.nc",2
+"165","2022/05/12 10:38:34 AM GMT+2",31,"männlich","Studium","SPD","Neutral","Neutral","Ich stimme nicht zu","Neutral","Neutral",NA,"3",70,"deutsches Staatsvolk",1
+"166","2022/05/12 10:41:18 AM GMT+2",40,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",74,"control.c",5
+"167","2022/05/12 10:41:18 AM GMT+2",40,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",74,"control.nc",2
+"168","2022/05/12 10:41:18 AM GMT+2",40,"weiblich","Studium","Grüne","Ich stimme nicht zu","Ich stimme zu","Ich stimme zu","Ich stimme zu","Ich stimme nicht zu",NA,"3",74,"deutsches Staatsvolk",4
