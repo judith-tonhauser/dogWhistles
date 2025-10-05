@@ -10,7 +10,6 @@ setwd(this.dir)
 
 # load relevant packages and set background color
 library(tidyverse)
-theme_set(theme_bw())
 
 # load the data
 ndwlib = read_csv(file="../data/ndwlib.csv") 
@@ -330,63 +329,9 @@ d <- d %>%
                                              equalityIndex)))
 table(d$attitudeControlIndex)
 
-# plot like H&P Fig 1 A ----
-# x-axis: transStereotypeIndex (5...35)
-# y-axis: the propotion of participants who had that transStereotypeIndex score
-# plot the proportion by dogwhistle/no dogwhistle
+write_csv(d, file="../data/d.csv")
 
-#table(d$participantID,d$transStereotypeIndex)
-#table(d[d$participantID < 11,]$transStereotypeIndex)
-
-# these are the columns where the information is
-table(d$transStereotypeIndex)
-table(d$criticalQuestion)
-table(d$dw)
-
-# create a new data frame with the relevant information, for participants who got the dw
-A.tmp.dw <- as.data.frame.matrix(table(d[d$dw == "yes",]$transStereotypeIndex,d[d$dw == "yes",]$criticalQuestion))
-A.tmp.dw
-
-# give the first column a name
-A.tmp.dw$transStereotypeIndex <- rownames(A.tmp.dw)
-
-# add a proportion column
-A.tmp.dw$prop = A.tmp.dw$`Building new prisons` / (A.tmp.dw$`Building new prisons` + A.tmp.dw$`Education programs`)
-
-# sort the transStereotypeIndex column by value
-A.tmp.dw$transStereotypeIndex <- factor(A.tmp.dw$transStereotypeIndex, levels = unique(A.tmp.dw$transStereotypeIndex))
-  
-  subjmeans$eventItem <- factor(subjmeans$eventItem, levels = unique(levels(means$eventItem)))
-
-
-# create a new data frame with the relevant information, for participants who didn't get the dw
-A.tmp.ndw <- as.data.frame.matrix(table(d[d$dw == "no",]$transStereotypeIndex,d[d$dw == "no",]$criticalQuestion))
-A.tmp.ndw
-
-# give the first column a name
-A.tmp.ndw$transStereotypeIndex <- rownames(A.tmp.ndw)
-
-# add a proportion column
-A.tmp.ndw$prop = A.tmp.ndw$`Building new prisons` / (A.tmp.ndw$`Building new prisons` + A.tmp.ndw$`Education programs`)
-
-
-ggplot(data=A.tmp.dw, aes(x=transStereotypeIndex, y=prop)) +
-  geom_point() +
-  geom_smooth(method = "loess")
-
-+
-  geom_smooth(color = "blue") +
-  geom_point(data=A.tmp.ndw, color = "red")
-
-  geom_point(aes(colour = factor(dw) )) +
-  theme(legend.position="top") +
-  theme(axis.text.y = element_text(size=10)) +
-  ylab("Target response") +
-  xlab("Trans Stereotype Index") 
-
-
-# code ends here 
-
+# this is as far as we went through Xenia's script ----
 
 proportion = d %>%
   group_by(transStereotypeIndex) %>%
