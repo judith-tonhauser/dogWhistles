@@ -24,6 +24,7 @@ nrow(dwlib) #35
 dwcons = read_csv(file="../data/dwcons.csv") 
 nrow(dwcons) #35
 
+# optional view
 # view(ndwlib)
 
 # add information about the condition to the files
@@ -86,22 +87,6 @@ colnames(d)[23] <- "participantAge"
 colnames(d)[24] <- "participantSexualOrientation"
 colnames(d)[25] <- "participantGender"
 colnames(d)[26] <- "participantCisOrTrans"
-
-# # convert all columns to character so that we can pivot long
-# d <- d %>%
-#   mutate(across(1:29, as.character)) 
-# 
-# # reorder the columns in preparation for pivoting
-# d = d[,c(1,29,2:ncol(d))]
-# names(d)
-#            
-# # pivot the data
-# d <- d %>%
-#   pivot_longer(
-#     cols = 4:23,
-#     names_to = "question",
-#     values_to = "response"
-#   )
 
 
 # recode, following H&P, the response to the critical question as a four-point scale
