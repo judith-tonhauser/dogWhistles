@@ -123,16 +123,6 @@ d %>%
 
 str(d)
 
-# # Convert trans-stereotypes columns to numeric
-# data1 <- data1 %>%
-#   mutate(across(c(`trans-stereotypes-confused`, 
-#                   `trans-stereotypes-mentally-ill`, 
-#                   `trans-stereotypes-dangerous`, 
-#                   `trans-stereotypes-frauds`, 
-#                   `trans-stereotypes-unnatural`), 
-#                 as.numeric))
-
-
 # calculate each participant's trans stereotype index (following H&P's black stereotype index from 5 to 35) 
 d <- d %>%
   mutate(transStereotypeIndex = rowSums(select(., 
@@ -150,22 +140,6 @@ d <- d %>%
                                                cisDangerous,
                                                cisFrauds,
                                                cisUnnatural)))
-
-
-
-
-# # Apply scoring and sum the responses into a new column
-# data1 <- data1 %>%
-#   mutate(across(`cis-stereotypes-confused`:`cis-stereotypes-unnatural`, as.numeric)) %>%
-#   mutate(cisStereotypesControl = rowSums(select(., 
-#                                                 `cis-stereotypes-confused`, 
-#                                                 `cis-stereotypes-mentally-ill`, 
-#                                                 `cis-stereotypes-dangerous`, 
-#                                                 `cis-stereotypes-frauds`, 
-#                                                 `cis-stereotypes-unnatural`), na.rm = TRUE))
-# # Rename the column trans_stereotypes to transStereotypesScore
-# data1 <- data1 %>%
-#   rename(transStereotypesScore = trans_stereotypes)
 
 # calculate each participant's gender fairness index (following H&P's racial fairness index from 4 to 23)
 # by summing up the relevant columns after changing them to the appropriate values
@@ -317,7 +291,7 @@ table(d$attitudeControlIndex)
 
 write_csv(d, file="../data/d.csv")
 
-# this is as far as we went through Xenia's script ----
+# the following metrics are to be discussed ----
 
 
 # View the first 20 rows to check the values in person-gender column
