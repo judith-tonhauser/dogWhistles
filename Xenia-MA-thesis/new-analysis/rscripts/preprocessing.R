@@ -127,11 +127,9 @@ d %>%
 str(d)
 
 # calculate each participant's trans stereotype index (following H&P's black stereotype index from 5 to 35) 
-# 5 means the person doesn't accept the stereotypes at all
-# 35 means the person accepts the stereotypes
-# the higher the score, the more the person accepts Xenia's proposed stereotypes
-# a shortcoming that must be considered is that the stereotypes are not checked against real data 
-# (are they even stereotypes?)
+# 5 means the person doesn't accept the negative stereotypes about trans people at all
+# 35 means the person accepts the negative stereotypes about trans people
+
 d <- d %>%
   mutate(transStereotypeIndex = rowSums(select(., 
                                             transConfused,
@@ -141,7 +139,9 @@ d <- d %>%
                                             transUnnatural)))
 
 # calculate each participant's cis stereotype index (following H&P's white stereotype index from 5 to 35) 
-# doesn't really allow for insights but can be used as a control score to see the difference between cis and trans
+# 5 means the person doesn't accept the negative stereotypes about cis people at all
+# 35 means the person accepts the negative stereotypes about cis people
+# can be used as a control score to see the difference between cis and trans
 # the difference between the cis and trans stereotypes score shows how differently the person sees transgender people compared to cisgender people
 d <- d %>%
   mutate(cisStereotypeIndex = rowSums(select(., 
@@ -152,11 +152,9 @@ d <- d %>%
                                                cisUnnatural)))
 
 # calculate each participant's gender fairness index (following H&P's racial fairness index from 4 to 23)
-# by summing up the relevant columns after changing them to the appropriate values
+# by summing up gender fairness apartment, sports, street harassment, and bullying after changing them to the appropriate values
 # 4 means the person believes that transgender people are treated very fairly
 # 23 means the person believes that transgender people are treated very unfairly
-# the higher the score, the more aware the person is of the unfairness towards transgender people
-# lack of knowledge/awareness about these topics can also lead to low score
 str(d$genderFairnessApartment) #chr change yes/no to 1/2
 d <- d %>%
   mutate(genderFairnessApartmentNum = case_when(
@@ -183,9 +181,9 @@ d <- d %>%
                                                genderFairnessBullying)))
 
 # calculate general fairness index (following H&P's general fairness score from 2 to 8)
+# by summing up general fairness education and healthcare
 # 2 means the person believes that people are treated very fairly and equally
 # 8 means the person believes that people are treated very unfairly and unequally
-# the higher the score, the more aware the person is of the unfairness in society
 str(d$generalFairnessEducation)
 d <- d %>%
   mutate(generalFairnessEducationNum = case_when(
@@ -218,14 +216,12 @@ table(d$generalFairnessIndex)
 # here there's a difference to H&P
 # the impression that the number of trans people increased doesn't mean that one also fears trans people
 # whereas H&P's impression that crime has increased means that the participant fears crime
-# so it might be better to not call this score the "fear of trans people" score, but rather
-# "awareness of trans people and issues"
 # there is no clear correlation between the observed increase/decrease of trans people and the considered importance of transgender discrimination
 # therefore it is not possible to create a meaningful score out of the two questions
-# the scales diverge in opposite directions (fearNumberTrans = 3 -> very aware, fearComparisonProblems = 3 -> very unaware)
-# maybe we should change the order of fearNumberTrans: increased = 1, decreased = 3
+# the scales diverge in opposite directions (fearNumberTrans = 3 -> increased, fearComparisonProblems = 3 -> less important)
 
 
+# This was the intended interpretation from H&P but it's not clear if this works:
 # A perceived increase of the number of trans people indicates more awareness
 # 3 means the person is highly aware of trans people and issues
 # 1 means the person is highly unaware of trans people and issues
@@ -242,7 +238,8 @@ table(d$fearNumberTransNum)
 # 1   2   3 
 # 2  27 111 
 
-# considering discrimination of transgender people as an important problem indicates more awareness
+
+# This was the intended interpretation from H&P but it's not clear if this works:
 # 1 means the person is highly aware of trans people and issues
 # 3 means the person is highly unaware of trans people and issues
 # the higher the score, the more unaware the person is of trans people and issues
@@ -272,6 +269,7 @@ table(d$fearOfTransPeopleIndex)
 d$awarenessOfTransPeopleAndIssues = d$fearOfTransPeopleIndex
 
 # calculate equality index (following H&P's equality index from 2 to 8)
+# by summing up equality equal chance and equality shouldn't worry
 # 2 means the person doesn't care about fairness and equality at all
 # 8 means the person cares about fairness and equality very much
 # the higher this index, the more the person cares about fairness and equality
@@ -314,9 +312,10 @@ table(d$equalityIndex)
 
 # calculate transAttitudeIndex (not in H&P, from 11 to 64)
 # the transAttitudeIndex is the sum of transStereotypesIndex, genderFairnessIndex, and fearOfTransPeopleIndex
+# XH: the higher the score, the more transphobic the person is!
+# TN: the higher this index, the more aware the person is of challenges that transgender people face
 # 11 means the person is not aware at all
 # 64 means the person is very aware
-# the higher this index, the more aware the person is about challenges that transgender people face
 # Because of the problems with the previous indices, we need to treat this index with caution as well
 d <- d %>%
   mutate(transAttitudeIndex = rowSums(select(., 
@@ -329,7 +328,8 @@ table(d$transAttitudeIndex)
 # the attitudeControlIndex is the sum of generalFairnessIndex and equalityIndex
 # 4 means the person is not aware of inequality and doesn't care about general fairness
 # 16 means the person is aware of inequality and cares about general fairness
-# the higher the score, the more the person is aware of inequality and cares about general fairness
+# XH: the higher the score, the more they care about fairness and equality
+# TN: the higher the score, the more the person is aware of inequality and cares about general fairness
 d <- d %>%
   mutate(attitudeControlIndex = rowSums(select(., 
                                              generalFairnessIndex,
