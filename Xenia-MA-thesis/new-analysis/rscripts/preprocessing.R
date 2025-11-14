@@ -10,7 +10,6 @@ setwd(this.dir)
 
 # load relevant packages and set background color
 library(tidyverse)
-library(dplyr)
 
 # load the data
 ndwlib = read_csv(file="../data/ndwlib.csv") 
@@ -23,9 +22,6 @@ dwlib = read_csv(file="../data/dwlib.csv")
 nrow(dwlib) #35
 dwcons = read_csv(file="../data/dwcons.csv") 
 nrow(dwcons) #35
-
-# optional view
-# view(ndwlib)
 
 # add information about the condition to the files
 ndwlib = ndwlib %>%
@@ -88,7 +84,6 @@ colnames(d)[24] <- "participantSexualOrientation"
 colnames(d)[25] <- "participantGender"
 colnames(d)[26] <- "participantCisOrTrans"
 
-
 # recode, following H&P, the response to the critical question as a four-point scale
 # put together prison vs. education program question and feel strongly question as one single question
 # On a punitiveness scale, 1 represents people with the most punitive attitude
@@ -101,17 +96,11 @@ d <- d %>%
     criticalQuestion == "Education programs" & feelStrongly == "I feel very strongly about this." ~ 4,
     TRUE ~ 666 # Assign NA for any unmatched cases
   ))
+table(d$targetResponse)
+#1  2  3  4 
+#16 15 42 67
 
-d %>% 
-  select(participantID,criticalQuestion) %>% 
-  unique() %>% 
-  group_by(criticalQuestion) %>% 
-  summarize(count=n())
-
-# criticalQuestion     count
-# 1 Building new prisons    31
-# 2 Education programs     109
-
+# how many participants in each of the four target responses?
 d %>% 
   select(participantID,targetResponse) %>% 
   unique() %>% 
@@ -119,12 +108,12 @@ d %>%
   summarize(count=n())
 
 # targetResponse count
-# 1              1    16
-# 2              2    15
-# 3              3    42
-# 4              4    67
+#       1    16
+#       2    15
+#       3    42
+#       4    67
 
-str(d)
+# predictor variable transStereotypeIndex ----
 
 # calculate each participant's trans stereotype index (following H&P's black stereotype index from 5 to 35) 
 # 5 means the person doesn't accept the negative stereotypes about trans people at all
@@ -138,18 +127,8 @@ d <- d %>%
                                             transFrauds,
                                             transUnnatural)))
 
-# calculate each participant's cis stereotype index (following H&P's white stereotype index from 5 to 35) 
-# 5 means the person doesn't accept the negative stereotypes about cis people at all
-# 35 means the person accepts the negative stereotypes about cis people
-# can be used as a control score to see the difference between cis and trans
-# the difference between the cis and trans stereotypes score shows how differently the person sees transgender people compared to cisgender people
-d <- d %>%
-  mutate(cisStereotypeIndex = rowSums(select(., 
-                                               cisConfused,
-                                               cisMentallyIll,
-                                               cisDangerous,
-                                               cisFrauds,
-                                               cisUnnatural)))
+
+# predictor variable genderFairnessIndex ----
 
 # calculate each participant's gender fairness index (following H&P's racial fairness index from 4 to 23)
 # by summing up gender fairness apartment, sports, street harassment, and bullying after changing them to the appropriate values
@@ -179,6 +158,25 @@ d <- d %>%
                                                genderFairnessSports,
                                                genderFairnessStreetHarassment,
                                                genderFairnessBullying)))
+
+# control variables ----
+
+#### cisStereotypeIndex ----
+
+# calculate each participant's cis stereotype index (following H&P's white stereotype index from 5 to 35) 
+# 5 means the person doesn't accept the negative stereotypes about cis people at all
+# 35 means the person accepts the negative stereotypes about cis people
+# can be used as a control score to see the difference between cis and trans
+# the difference between the cis and trans stereotypes score shows how differently the person sees transgender people compared to cisgender people
+d <- d %>%
+  mutate(cisStereotypeIndex = rowSums(select(., 
+                                             cisConfused,
+                                             cisMentallyIll,
+                                             cisDangerous,
+                                             cisFrauds,
+                                             cisUnnatural)))
+
+#### generalFairnessIndex ----
 
 # calculate general fairness index (following H&P's general fairness score from 2 to 8)
 # by summing up general fairness education and healthcare
@@ -211,6 +209,8 @@ d <- d %>%
                                               generalFairnessEducationNum,
                                               generalFairnessHealthcareNum)))
 table(d$generalFairnessIndex)
+
+#### fearOfTransPeopleIndex ----
 
 # calculate fear of trans people score (following H&P's fear of crime score from 2 to 6)
 # here there's a difference to H&P
@@ -268,6 +268,8 @@ table(d$fearOfTransPeopleIndex)
 
 d$awarenessOfTransPeopleAndIssues = d$fearOfTransPeopleIndex
 
+#### equalityIndex ----
+
 # calculate equality index (following H&P's equality index from 2 to 8)
 # by summing up equality equal chance and equality shouldn't worry
 # 2 means the person doesn't care about fairness and equality at all
@@ -310,6 +312,8 @@ table(d$equalityIndex)
 #  2  3  4  5  6  7  8 
 # 11 13 11 19 22 20 44 
 
+#### transAttitudeIndex ----
+
 # calculate transAttitudeIndex (not in H&P, from 11 to 64)
 # the transAttitudeIndex is the sum of transStereotypesIndex, genderFairnessIndex, and fearOfTransPeopleIndex
 # XH: the higher the score, the more transphobic the person is!
@@ -324,6 +328,8 @@ d <- d %>%
                                         fearOfTransPeopleIndex)))
 table(d$transAttitudeIndex)
 
+#### attitudeControlIndex ----
+
 # calculate attitudeControlIndex (not in H&P, from 4 to 16)
 # the attitudeControlIndex is the sum of generalFairnessIndex and equalityIndex
 # 4 means the person is not aware of inequality and doesn't care about general fairness
@@ -336,28 +342,44 @@ d <- d %>%
                                              equalityIndex)))
 table(d$attitudeControlIndex)
 
+#### additional control variables from H&P ----
+names(d)
+# H&P: Ideology, Education, Gender, Age, Income, South
+# we have:
+# Gender
+table(d$participantGender)
+str(d$participantGender)
+d = d %>%
+  mutate(participantGenderNum = case_when(
+    participantGender == "Woman" ~ 0,
+    participantGender == "Man" ~ 1,
+    TRUE ~ 666))
+table(d$participantGenderNum)
+# Age
+table(d$participantAge)
+# SexualOrientation
+table(d$participantSexualOrientation)
+# CisOrTrans
+table(d$participantCisOrTrans) # all are cisgender
+
+# save the preprocessed data
 write_csv(d, file="../data/d.csv")
 
-# the following metrics are to be discussed ----
+# information about participants ----
 
+length(unique(d$participantID)) #140 participants
 
-# View the first 20 rows to check the values in person-gender column
-head(d[, 26], 20)
-
-#count how many men and women participants we have
-# Count the number of men and women in the dataset
+#gender distribution
 d %>%
   group_by(`participantGender`) %>%
-  summarise(count = n()) # 17 men, 18 women
+  summarise(count = n()) # 71 men, 69 women
 
-#assigning numeric value to gender: Man = 0, Woman = 1
-temporary_data1 <- temporary_data1 %>%
-  mutate(Man0Woman1 = ifelse(`person-gender`== "Man", 0, 1))
+# age range
+table(d$participantAge) #21-83
 
-# Calculate the point-biserial correlation between Gender and TargetStimulus
-correlation_results_gender <- cor.test(
-  temporary_data1$Prison0Education1,
-  temporary_data1$Man0Woman1,
-  method = "pearson"
-)
+table(d$participantCisOrTrans) # all are cis
+
+# SexualOrientation
+table(d$participantSexualOrientation)
+
 

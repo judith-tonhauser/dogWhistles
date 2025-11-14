@@ -7,70 +7,112 @@ setwd(this.dir)
 
 # load relevant packages 
 library(tidyverse)
-library(lme4)
-library(lmerTest)
-
-# color-blind-friendly palette
-cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-
-theme_set(theme_bw())
+library(ordinal)
 
 # Hurwitz & Peffley 2005
 # p.105: To test our hypotheses, we regressed Anticrime Policy Preferences on the predictor
 # variables, a dummy variable representing the question frame (coded 1 for inner-city reference)
-# and 0 otherwise), and interactions for each of the predictors and question frame
-
-# logistic mixed-effects regression to approximate Fig 1A in Hurwitz & Peffley ----
+# and 0 otherwise), and interactions for each of the predictors and question frame, 
+# using ordered probit analysis
 
 # load the data 
 d = read_csv("../data/d.csv")
 nrow(d) #140
 
-# predict answer to critical question (prison, education program) from 
-# dogwhistle (dw: yes, no)
-# transStereotypeIndex (numeric)
+# make sure the variables have the write types
 
+# targetResponse is the dependent variable (1-4)
+table(d$targetResponse)
+str(d$targetResponse) #needs to be an ordered factor
+d$targetResponse <- as.factor(d$targetResponse)
 
-# change variables for logistic mixed-effects model
+# the two predictor variables are transStereotypeIndex and genderFairnessIndex
+str(d$transStereotypeIndex) #numeric
+str(d$genderFairnessIndex) #numeric
 
-# critical question is dependent variable (0,1)
+# the question frame is a factor, with no/0 and yes/1
+str(d$dw)
 d = d %>%
-  mutate(criticalQuestionBinary = case_when(
-    criticalQuestion == "Education programs" ~ 0,
-    criticalQuestion == "Building new prisons" ~ 1,
-    TRUE ~ 666))
-table(d$criticalQuestionBinary)
-
-# transStereotypeIndex is numeric
-str(d$transStereotypeIndex)
-
-# dogwhistle is a factor (0, 1)
-d = d %>%
-  mutate(dwBinary = case_when(
+  mutate(dwFactor = case_when(
     dw == "yes" ~ 1,
     dw == "no" ~ 0,
     TRUE ~ 666))
-d$dwBinary <- as.factor(d$dwBinary)
-str(d$dwBinary)
-table(d$dwBinary)
-table(d$dwBinary,d$criticalQuestionBinary)
+d$dwFactor <- as.factor(d$dwFactor)
+str(d$dwFactor)
 
-# check that all is well
-summary(d)
-  
-# set reference levels
-d = d %>%
-  mutate(dwBinary = fct_relevel(dwBinary, "0"))
+# the control variables 
+# cisStereotypeIndex
+# generalFairnessIndex
+# fearOfTransPeopleIndex
+# equalityIndex
+# transAttitudeIndex
+# attitudeControlIndex
+# H&P also had: Ideology, Party Identification, Education, Gender, Age, Income, South
 
-# logistic mixed-effects model
-
-m = glm(criticalQuestionBinary ~ dw+transStereotypeIndex, data=d, 
-          family = binomial)
+# fit the model ----
+m <- clmm(
+  targetResponse ~ transStereotypeIndex + genderFairnessIndex 
+  + transStereotypeIndex:dwFactor + genderFairnessIndex:dwFactor
+  + participantGenderNum
+  + participantAge
+  + (1|participantID)
+  + (1|cisStereotypeIndex) + (1|generalFairnessIndex),
+  data = d,
+  link = "probit"
+)
 summary(m)
 
-m2 = glm(criticalQuestionBinary ~ dw*transStereotypeIndex, data=d, 
-        family = binomial)
-summary(m2)
+# plot the model output ----
 
-anova(m,m2) # model with interaction is not better
+library(ggeffects)
+library(ggplot2)
 
+pred <- ggpredict(m, terms = c("transStereotypeIndex", "dwFactor"))
+pred
+colnames(pred)
+
+prob_high <- pred %>%
+  filter(response.level %in% c("3", "4")) %>%   # Use response.level, not facet
+  group_by(x, group) %>%
+  summarize(prob = sum(predicted),
+            conf.low = sum(conf.low),
+            conf.high = sum(conf.high),
+            .groups = "drop")
+
+# Plot
+ggplot(prob_high, aes(x = x, y = prob, color = group)) +
+  geom_line(size = 1.2) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = group), alpha = 0.2, color = NA) +
+  labs(
+    x = "transStereotypeIndex",
+    y = "Probability of targetResponse = 3 or 4",
+    color = "dwFactor",
+    fill = "dwFactor",
+    title = "Predicted Probability of High targetResponse by transStereotypeIndex and dwFactor"
+  ) +
+  theme_minimal(base_size = 14)
+
+pred <- ggpredict(m, terms = c("genderFairnessIndex", "dwFactor"))
+pred
+colnames(pred)
+
+prob_high <- pred %>%
+  filter(response.level %in% c("3", "4")) %>%   # Use response.level, not facet
+  group_by(x, group) %>%
+  summarize(prob = sum(predicted),
+            conf.low = sum(conf.low),
+            conf.high = sum(conf.high),
+            .groups = "drop")
+
+# Plot
+ggplot(prob_high, aes(x = x, y = prob, color = group)) +
+  geom_line(size = 1.2) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = group), alpha = 0.2, color = NA) +
+  labs(
+    x = "transStereotypeIndex",
+    y = "Probability of targetResponse = 3 or 4",
+    color = "dwFactor",
+    fill = "dwFactor",
+    title = "Predicted Probability of High targetResponse by transStereotypeIndex and dwFactor"
+  ) +
+  theme_minimal(base_size = 14)
