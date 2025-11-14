@@ -8,7 +8,7 @@ Sys.setlocale("LC_ALL", "en_US.UTF-8")
 this.dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(this.dir)
 
-# load relevant packages and set background color
+# load relevant packages
 library(tidyverse)
 
 # load the data
@@ -84,6 +84,10 @@ colnames(d)[24] <- "participantSexualOrientation"
 colnames(d)[25] <- "participantGender"
 colnames(d)[26] <- "participantCisOrTrans"
 
+# column 28: preregistered as conservative or liberal
+
+# dependent variable ----
+
 # recode, following H&P, the response to the critical question as a four-point scale
 # put together prison vs. education program question and feel strongly question as one single question
 # On a punitiveness scale, 1 represents people with the most punitive attitude
@@ -112,6 +116,7 @@ d %>%
 #       2    15
 #       3    42
 #       4    67
+# the majority of the participants are towards less punitive (3 and 4)
 
 # predictor variable transStereotypeIndex ----
 
@@ -210,68 +215,58 @@ d <- d %>%
                                               generalFairnessHealthcareNum)))
 table(d$generalFairnessIndex)
 
-#### fearOfTransPeopleIndex ----
+#### moreTransPeopleIndex ----
 
-# calculate fear of trans people score (following H&P's fear of crime score from 2 to 6)
-# here there's a difference to H&P
-# the impression that the number of trans people increased doesn't mean that one also fears trans people
-# whereas H&P's impression that crime has increased means that the participant fears crime
-# there is no clear correlation between the observed increase/decrease of trans people and the considered importance of transgender discrimination
-# therefore it is not possible to create a meaningful score out of the two questions
-# the scales diverge in opposite directions (fearNumberTrans = 3 -> increased, fearComparisonProblems = 3 -> less important)
+# the data under fearNumberTrans and fearComparisonProblems were originally collected to calculate
+# a fearOfTransPeopleIndex, following H&P's fear of crime score from 2 to 6
 
+# however, the impression that the number of trans people increased doesn't mean that one also fears trans people
+# and the impression that discrimination of transgender people is less important than other problems doesn't 
+# mean the participants are unaware of the problem that trans people face
 
-# This was the intended interpretation from H&P but it's not clear if this works:
-# A perceived increase of the number of trans people indicates more awareness
+# so we decided to not sum up fearNumberTrans and fearComparisonProblems to calculate a fearOfTransPeopleIndex
+# but are using these two numbers separately
+
+# moreTransPeopleIndex
 # 3 means the person is highly aware of trans people and issues
 # 1 means the person is highly unaware of trans people and issues
 # the higher the score, the more aware the person is of trans people and issues
 str(d$fearNumberTrans) 
 d <- d %>%
-  mutate(fearNumberTransNum = case_when(
+  mutate(moreTransPeopleIndex = case_when(
     fearNumberTrans == "The number of trans people increased" ~ 3,
     fearNumberTrans == "The number of trans people stayed about the same" ~ 2,
     fearNumberTrans == "The number of trans people decreased" ~ 1,
     TRUE ~ 666))
-table(d$fearNumberTrans)
-table(d$fearNumberTransNum)
+table(d$moreTransPeopleIndex)
 # 1   2   3 
 # 2  27 111 
+# most participants believe that there are now more trans people
 
+#### fearComparisonProblemsIndex ----
 
-# This was the intended interpretation from H&P but it's not clear if this works:
 # 1 means the person is highly aware of trans people and issues
 # 3 means the person is highly unaware of trans people and issues
 # the higher the score, the more unaware the person is of trans people and issues
-# But compared to the other problems mentioned (education, taxes and the environment), 
-# saying discrimination of transgender people is less important than other problems doesn't mean they are unaware of the problem!
 
 str(d$fearComparisonProblems)
 d <- d %>%
-  mutate(fearComparisonProblemsNum = case_when(
+  mutate(fearComparisonProblemsIndex = case_when(
     fearComparisonProblems == "It is the most important problem" ~ 1,
     fearComparisonProblems == "It is no more important than other problems" ~ 2,
     fearComparisonProblems == "It is less important than other problems" ~ 3,
     TRUE ~ 666))
 table(d$fearComparisonProblems)
-table(d$fearComparisonProblemsNum)
+table(d$fearComparisonProblemsIndex)
 #  1  2  3 
 #  6 75 59
-
-d <- d %>%
-  mutate(fearOfTransPeopleIndex = rowSums(select(., 
-                                            fearNumberTransNum,
-                                            fearComparisonProblemsNum)))
-table(d$fearOfTransPeopleIndex)
-# 3  4  5  6 
-# 2 26 60 52
-
-d$awarenessOfTransPeopleAndIssues = d$fearOfTransPeopleIndex
+# most participants assume that the issues trans people face are no more important than other problems
+# a lot assume that the issues trans people face are less important than other problems
 
 #### equalityIndex ----
 
 # calculate equality index (following H&P's equality index from 2 to 8)
-# by summing up equality equal chance and equality shouldn't worry
+# by summing up qualityEqualChance and equalityShouldntWorry
 # 2 means the person doesn't care about fairness and equality at all
 # 8 means the person cares about fairness and equality very much
 # the higher this index, the more the person cares about fairness and equality
@@ -312,42 +307,25 @@ table(d$equalityIndex)
 #  2  3  4  5  6  7  8 
 # 11 13 11 19 22 20 44 
 
-#### transAttitudeIndex ----
+#### additional control variables ----
 
-# calculate transAttitudeIndex (not in H&P, from 11 to 64)
-# the transAttitudeIndex is the sum of transStereotypesIndex, genderFairnessIndex, and fearOfTransPeopleIndex
-# XH: the higher the score, the more transphobic the person is!
-# TN: the higher this index, the more aware the person is of challenges that transgender people face
-# 11 means the person is not aware at all
-# 64 means the person is very aware
-# Because of the problems with the previous indices, we need to treat this index with caution as well
-d <- d %>%
-  mutate(transAttitudeIndex = rowSums(select(., 
-                                        transStereotypeIndex,
-                                        genderFairnessIndex,
-                                        fearOfTransPeopleIndex)))
-table(d$transAttitudeIndex)
+# H&P: ideology 
+# We know whether participants are liberal or conservative
+table(d$preregistered)
+# cons liberal 
+# 70      70
 
-#### attitudeControlIndex ----
+# H&P: party identification 
+# not collected
 
-# calculate attitudeControlIndex (not in H&P, from 4 to 16)
-# the attitudeControlIndex is the sum of generalFairnessIndex and equalityIndex
-# 4 means the person is not aware of inequality and doesn't care about general fairness
-# 16 means the person is aware of inequality and cares about general fairness
-# XH: the higher the score, the more they care about fairness and equality
-# TN: the higher the score, the more the person is aware of inequality and cares about general fairness
-d <- d %>%
-  mutate(attitudeControlIndex = rowSums(select(., 
-                                             generalFairnessIndex,
-                                             equalityIndex)))
-table(d$attitudeControlIndex)
+# H&P: education
+# not collected
 
-#### additional control variables from H&P ----
-names(d)
-# H&P: Ideology, Education, Gender, Age, Income, South
-# we have:
-# Gender
+# H&P: gender
 table(d$participantGender)
+# Man Woman 
+# 71    69
+
 str(d$participantGender)
 d = d %>%
   mutate(participantGenderNum = case_when(
@@ -355,10 +333,31 @@ d = d %>%
     participantGender == "Man" ~ 1,
     TRUE ~ 666))
 table(d$participantGenderNum)
-# Age
+
+# H&P: age
 table(d$participantAge)
+
+# H&P: income
+# not collected
+
+# H&P: south
+# not collected (region is not justifiable)
+
 # SexualOrientation
 table(d$participantSexualOrientation)
+
+# Bisexual 
+# 18 
+# Gay or Lesbian 
+# 6 
+# Other 
+# 2 
+# Queer 
+# 1 
+# Straight or heterosexual 
+# 113
+# most are straight or hetero
+
 # CisOrTrans
 table(d$participantCisOrTrans) # all are cisgender
 

@@ -7,19 +7,20 @@ setwd(this.dir)
 
 # load relevant packages and set background color
 library(tidyverse)
+theme_set(theme_bw())
 
 # color-blind-friendly palette
 cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
-theme_set(theme_bw())
+# plot the data with criticalQuestion ----
 
-# plot the data to approximate Hurwitz & Peffley Fig 1A ----
+##### plot the data to approximate Hurwitz & Peffley Fig 1A ----
 
 # load the data 
 d = read_csv("../data/d.csv")
 nrow(d) #140
 
-# x-axis: transStereotypeIndex (5...35)
+# x-axis: transStereotypeIndex (5...35; the higher, the more the participant accepts the negative stereotypes about trans people)
 # y-axis: the proportion of participants who had that transStereotypeIndex score and
 # chose the prison response in the critical question
 # plot the proportion by dogwhistle/no dogwhistle
@@ -27,13 +28,13 @@ nrow(d) #140
 table(d[d$participantID < 11,]$transStereotypeIndex) 
 # the first 10 participants have these transStereotypeIndex values
 
-length(unique(d$participantID)) #140 participants
-
+names(d)
 # these are the columns where the information is
 table(d$transStereotypeIndex) # number of participants with transStereotypeIndex 5 to 35
 table(d[d$transStereotypeIndex == 5,]$transStereotypeIndex,d[d$transStereotypeIndex == 5,]$participantID)
 # these are the 30 participants with transStereotypeIndex = 5
 table(d$criticalQuestion) # what did the participants choose (prison, education program)
+table(d$targetResponse) # numerical representation of choice
 table(d$dw) # were they in the dw condition?
 
 # create a new data frame with the relevant information, for participants who got the dw
@@ -84,48 +85,68 @@ A
 str(A$transStereotypeIndex)
 A$transStereotypeIndex = as.numeric(A$transStereotypeIndex)
 
-#plot 
-ggplot(data=A, aes(x=transStereotypeIndex, y=prop, group = dw, color = dw, fill = dw)) +
-  geom_point(shape=21, size = 2) + 
-  scale_fill_manual(values=c("#E69F00","#56B4E9")) +
-  geom_smooth(method = "lm", se = TRUE) + 
+#view(A)
+
+# transform A to long
+A = A %>%
+  pivot_longer(!c(prop,dw,transStereotypeIndex), names_to = "choice", values_to = "count")
+A
+
+ggplot(data=A, aes(x=transStereotypeIndex, y=count,fill=choice)) +
+  geom_bar(position="stack", stat="identity") +
   theme(legend.position="top") +
   theme(axis.text.y = element_text(size=10)) +
-  scale_x_continuous(n.breaks = 10, limits=c(5, 35)) +
-  scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
-  ylab("Proportion in favor of prisons") +
+  scale_x_continuous(n.breaks = 10, limits=c(4.5, 35.5)) +
+  scale_y_continuous(n.breaks = 5, limits=c(0,30)) +
+  ylab("count") +
   xlab("Trans Stereotype Index") 
 ggsave("../graphs/1A-based-on-data.pdf",height=3,width=6)
- 
-ggplot(data=A, aes(x=transStereotypeIndex, y=prop, group = dw, color = dw, fill = dw)) +
-  geom_point(shape=21, size = 2) + 
-  scale_fill_manual(values=c("#E69F00","#56B4E9")) +
-  geom_smooth(method = "glm", 
-              method.args = list(family = "quasibinomial"), 
-              se = TRUE) + 
-  theme(legend.position="top") +
-  theme(axis.text.y = element_text(size=10)) +
-  scale_x_continuous(n.breaks = 10, limits=c(5, 35)) +
-  scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
-  ylab("Proportion in favor of prisons") +
-  xlab("Trans Stereotype Index") 
 
-d = d %>%
-  mutate(criticalQuestionBinary = case_when(
-    criticalQuestion == "Education programs" ~ 0,
-    criticalQuestion == "Building new prisons" ~ 1,
-    TRUE ~ 666))
-table(d$criticalQuestionBinary)
-d$criticalQuestionBinary = as.integer(d$criticalQuestionBinary)
-str(d$criticalQuestionBinary)
+# #plot 
+# ggplot(data=A, aes(x=transStereotypeIndex, y=prop, group = dw, color = dw, fill = dw)) +
+#   geom_bar(shape=21, size = 2) +
+#   scale_fill_manual(values=c("#E69F00","#56B4E9")) +
+#   geom_smooth(method = "lm", se = TRUE) + 
+#   theme(legend.position="top") +
+#   theme(axis.text.y = element_text(size=10)) +
+#   scale_x_continuous(n.breaks = 10, limits=c(5, 35)) +
+#   scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
+#   ylab("Proportion in favor of prisons") +
+#   xlab("Trans Stereotype Index") 
+# 
+#  
+# ggplot(data=A, aes(x=transStereotypeIndex, y=prop, group = dw, color = dw, fill = dw)) +
+#   geom_point(shape=21, size = 2) + 
+#   scale_fill_manual(values=c("#E69F00","#56B4E9")) +
+#   geom_smooth(method = "glm", 
+#               method.args = list(family = "quasibinomial"), 
+#               se = TRUE) + 
+#   theme(legend.position="top") +
+#   theme(axis.text.y = element_text(size=10)) +
+#   scale_x_continuous(n.breaks = 10, limits=c(5, 35)) +
+#   scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
+#   ylab("Proportion in favor of prisons") +
+#   xlab("Trans Stereotype Index") 
+# 
+# ggsave("../graphs/1A-based-on-data.pdf",height=3,width=6)
+# 
+# d = d %>%
+#   mutate(criticalQuestionBinary = case_when(
+#     criticalQuestion == "Education programs" ~ 0,
+#     criticalQuestion == "Building new prisons" ~ 1,
+#     TRUE ~ 666))
+# table(d$criticalQuestionBinary)
+# d$criticalQuestionBinary = as.integer(d$criticalQuestionBinary)
+# str(d$criticalQuestionBinary)
+# 
+# ggplot(d, aes(x=transStereotypeIndex, y=criticalQuestionBinary, group = dw, color = dw, fill = dw)) + 
+#   geom_jitter(shape=21, size = 2, width = 0.1, height = 0.1) + 
+#   scale_fill_manual(values=c("#E69F00","#56B4E9")) +
+#   stat_smooth(method="glm", se=TRUE, 
+#               method.args = list(family=binomial))
 
-ggplot(d, aes(x=transStereotypeIndex, y=criticalQuestionBinary, group = dw, color = dw, fill = dw)) + 
-  geom_jitter(shape=21, size = 2, width = 0.1, height = 0.1) + 
-  scale_fill_manual(values=c("#E69F00","#56B4E9")) +
-  stat_smooth(method="glm", se=TRUE, 
-              method.args = list(family=binomial))
 
-# plot the data to approximate Hurwitz & Peffley Fig 1B ----
+#### plot the data to approximate Hurwitz & Peffley Fig 1B ----
 
 # load the data 
 d = read_csv("../data/d.csv")
@@ -197,49 +218,186 @@ B
 str(B$genderFairnessIndex)
 B$genderFairnessIndex = as.numeric(B$genderFairnessIndex)
 
-#plot 
-ggplot(data=B, aes(x=genderFairnessIndex, y=prop, group = dw, color = dw, fill = dw)) +
-  geom_point(shape=21, size = 2) + 
-  scale_fill_manual(values=c("#E69F00","#56B4E9")) +
-  geom_smooth(method = "lm", se = TRUE) + 
+#view(B)
+
+# transform B to long
+B = B %>%
+  pivot_longer(!c(prop,dw,genderFairnessIndex), names_to = "choice", values_to = "count")
+B
+
+ggplot(data=B, aes(x=genderFairnessIndex, y=count,fill=choice)) +
+  geom_bar(position="stack", stat="identity") +
   theme(legend.position="top") +
   theme(axis.text.y = element_text(size=10)) +
-  scale_x_continuous(limits=c(4, 23), breaks=c(4,10,15,20,23),
-                     labels=c("4","10","15","20","23")) +
-  scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
-  ylab("Proportion in favor of prisons") +
+  scale_x_continuous(n.breaks = 5, limits=c(3.5, 24.5)) +
+  scale_y_continuous(n.breaks = 5, limits=c(0,20)) +
+  ylab("count") +
   xlab("Gender Fairness Index") 
 ggsave("../graphs/1B-based-on-data.pdf",height=3,width=6)
 
-ggplot(data=B, aes(x=genderFairnessIndex, y=prop, group = dw, color = dw, fill = dw)) +
-  geom_point(shape=21, size = 2) + 
-  scale_fill_manual(values=c("#E69F00","#56B4E9")) +
-  geom_smooth(method = "glm", 
-              method.args = list(family = "quasibinomial"), 
-              se = TRUE) + 
+# #plot 
+# ggplot(data=B, aes(x=genderFairnessIndex, y=prop, group = dw, color = dw, fill = dw)) +
+#   geom_point(shape=21, size = 2) + 
+#   scale_fill_manual(values=c("#E69F00","#56B4E9")) +
+#   geom_smooth(method = "lm", se = TRUE) + 
+#   theme(legend.position="top") +
+#   theme(axis.text.y = element_text(size=10)) +
+#   scale_x_continuous(limits=c(4, 23), breaks=c(4,10,15,20,23),
+#                      labels=c("4","10","15","20","23")) +
+#   scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
+#   ylab("Proportion in favor of prisons") +
+#   xlab("Gender Fairness Index") 
+# ggsave("../graphs/1B-based-on-data.pdf",height=3,width=6)
+# 
+# ggplot(data=B, aes(x=genderFairnessIndex, y=prop, group = dw, color = dw, fill = dw)) +
+#   geom_point(shape=21, size = 2) + 
+#   scale_fill_manual(values=c("#E69F00","#56B4E9")) +
+#   geom_smooth(method = "glm", 
+#               method.args = list(family = "quasibinomial"), 
+#               se = TRUE) + 
+#   theme(legend.position="top") +
+#   theme(axis.text.y = element_text(size=10)) +
+#   scale_x_continuous(limits=c(4, 23), breaks=c(4,10,15,20,23),
+#                      labels=c("4","10","15","20","23")) +
+#   scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
+#   ylab("Proportion in favor of prisons") +
+#   xlab("Gender Fairness Index")
+# ggsave("../graphs/1Bv2-based-on-data.pdf",height=3,width=6)
+# 
+# d = d %>%
+#   mutate(criticalQuestionBinary = case_when(
+#     criticalQuestion == "Education programs" ~ 0,
+#     criticalQuestion == "Building new prisons" ~ 1,
+#     TRUE ~ 666))
+# table(d$criticalQuestionBinary)
+# d$criticalQuestionBinary = as.integer(d$criticalQuestionBinary)
+# str(d$criticalQuestionBinary)
+# 
+# ggplot(d, aes(x=genderFairnessIndex, y=criticalQuestionBinary, group = dw, color = dw, fill = dw)) + 
+#   geom_jitter(shape=21, size = 2, width = 0.1, height = 0.2) + 
+#   scale_fill_manual(values=c("#E69F00","#56B4E9")) +
+#   stat_smooth(method="glm", se=TRUE, 
+#               method.args = list(family=binomial)) +
+#   ylab("Proportion in favor of prisons") +
+#   xlab("Gender Fairness Index")
+# ggsave("../graphs/1Bv3-based-on-data.pdf",height=3,width=6)
+
+# plot the data with targetResponse ----
+
+##### plot the data to approximate Hurwitz & Peffley Fig 1A ----
+
+# load the data 
+d = read_csv("../data/d.csv")
+nrow(d) #140
+
+table(d$targetResponse) # numerical representation of choice
+table(d$dw) # were they in the dw condition?
+
+# create a new data frame with the relevant information, for participants who got the dw
+A.tmp.dw <- as.data.frame.matrix(table(d[d$dw == "yes",]$transStereotypeIndex,d[d$dw == "yes",]$targetResponse))
+A.tmp.dw
+
+# give the first column a name
+A.tmp.dw$transStereotypeIndex <- rownames(A.tmp.dw)
+
+# add the info on "dw"
+A.tmp.dw$dw = "yes"
+A.tmp.dw
+
+# create a new data frame with the relevant information, for participants who didn't get the dw
+A.tmp.ndw <- as.data.frame.matrix(table(d[d$dw == "no",]$transStereotypeIndex,d[d$dw == "no",]$targetResponse))
+A.tmp.ndw
+
+# give the first column a name
+A.tmp.ndw$transStereotypeIndex <- rownames(A.tmp.ndw)
+
+# add the info on "dw"
+A.tmp.ndw$dw = "no"
+A.tmp.ndw
+
+# bind the two dataframes
+A = rbind(A.tmp.dw,A.tmp.ndw)
+A
+
+# make sure transStereotypeIndex is numeric (so that it is plotted numerically on x-axis)
+str(A$transStereotypeIndex)
+A$transStereotypeIndex = as.numeric(A$transStereotypeIndex)
+
+#view(A)
+
+# transform A to long
+A = A %>%
+  pivot_longer(!c(dw,transStereotypeIndex), names_to = "choice", values_to = "count")
+A
+
+
+ggplot(data=A, aes(x=transStereotypeIndex, y=count,fill=choice)) +
+  geom_bar(position="stack", stat="identity") +
+  scale_fill_manual("legend", values = c("1" = "black", "2" = "gray40", "3" = "#E69F00", "4" = "#F0E442")) +
   theme(legend.position="top") +
   theme(axis.text.y = element_text(size=10)) +
-  scale_x_continuous(limits=c(4, 23), breaks=c(4,10,15,20,23),
-                     labels=c("4","10","15","20","23")) +
-  scale_y_continuous(n.breaks = 5, limits=c(-0.1, 1)) +
-  ylab("Proportion in favor of prisons") +
-  xlab("Gender Fairness Index")
-ggsave("../graphs/1Bv2-based-on-data.pdf",height=3,width=6)
+  scale_x_continuous(n.breaks = 10, limits=c(4.5, 35.5)) +
+  scale_y_continuous(n.breaks = 5, limits=c(0,30)) +
+  facet_grid(. ~ dw) +
+  ylab("count") +
+  xlab("Trans Stereotype Index") 
+ggsave("../graphs/1A-based-on-data-NEW.pdf",height=3,width=8)
 
-d = d %>%
-  mutate(criticalQuestionBinary = case_when(
-    criticalQuestion == "Education programs" ~ 0,
-    criticalQuestion == "Building new prisons" ~ 1,
-    TRUE ~ 666))
-table(d$criticalQuestionBinary)
-d$criticalQuestionBinary = as.integer(d$criticalQuestionBinary)
-str(d$criticalQuestionBinary)
 
-ggplot(d, aes(x=genderFairnessIndex, y=criticalQuestionBinary, group = dw, color = dw, fill = dw)) + 
-  geom_jitter(shape=21, size = 2, width = 0.1, height = 0.2) + 
-  scale_fill_manual(values=c("#E69F00","#56B4E9")) +
-  stat_smooth(method="glm", se=TRUE, 
-              method.args = list(family=binomial)) +
-  ylab("Proportion in favor of prisons") +
-  xlab("Gender Fairness Index")
-ggsave("../graphs/1Bv3-based-on-data.pdf",height=3,width=6)
+##### plot the data to approximate Hurwitz & Peffley Fig 1B ----
+
+# load the data 
+d = read_csv("../data/d.csv")
+nrow(d) #140
+
+table(d$genderFairnessIndex) # number of participants with genderFairnessIndex 4 to 23
+
+# create a new data frame with the relevant information, for participants who got the dw
+B.tmp.dw <- as.data.frame.matrix(table(d[d$dw == "yes",]$genderFairnessIndex,d[d$dw == "yes",]$targetResponse))
+B.tmp.dw
+
+# give the first column a name
+B.tmp.dw$genderFairnessIndex <- rownames(B.tmp.dw)
+
+# add the info on "dw"
+B.tmp.dw$dw = "yes"
+B.tmp.dw
+
+# create a new data frame with the relevant information, for participants who didn't get the dw
+B.tmp.ndw <- as.data.frame.matrix(table(d[d$dw == "no",]$genderFairnessIndex,d[d$dw == "no",]$targetResponse))
+B.tmp.ndw
+
+# give the first column a name
+B.tmp.ndw$genderFairnessIndex <- rownames(B.tmp.ndw)
+
+# add the info on "dw"
+B.tmp.ndw$dw = "no"
+B.tmp.ndw
+
+# bind the two dataframes
+B = rbind(B.tmp.dw,B.tmp.ndw)
+B
+
+# make sure genderFairnessIndex is numeric (so that it is plotted numerically on x-axis)
+str(B$genderFairnessIndex)
+B$genderFairnessIndex = as.numeric(B$genderFairnessIndex)
+
+#view(B)
+
+# transform B to long
+B = B %>%
+  pivot_longer(!c(dw,genderFairnessIndex), names_to = "choice", values_to = "count")
+B
+
+ggplot(data=B, aes(x=genderFairnessIndex, y=count,fill=choice)) +
+  geom_bar(position="stack", stat="identity") +
+  scale_fill_manual("legend", values = c("1" = "black", "2" = "gray40", "3" = "#E69F00", "4" = "#F0E442")) +
+  theme(legend.position="top") +
+  theme(axis.text.y = element_text(size=10)) +
+  scale_x_continuous(n.breaks = 5, limits=c(3.5, 24.5)) +
+  scale_y_continuous(n.breaks = 5, limits=c(0,30)) +
+  facet_grid(. ~ dw) +
+  ylab("count") +
+  xlab("genderFairnessIndex") 
+ggsave("../graphs/1B-based-on-data-NEW.pdf",height=3,width=8)
+

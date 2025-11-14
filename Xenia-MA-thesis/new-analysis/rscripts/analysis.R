@@ -40,29 +40,50 @@ d = d %>%
 d$dwFactor <- as.factor(d$dwFactor)
 str(d$dwFactor)
 
-# the control variables 
-# cisStereotypeIndex
-# generalFairnessIndex
-# fearOfTransPeopleIndex
-# equalityIndex
-# transAttitudeIndex
-# attitudeControlIndex
-# H&P also had: Ideology, Party Identification, Education, Gender, Age, Income, South
-
 # fit the model ----
 m <- clmm(
   targetResponse ~ transStereotypeIndex + genderFairnessIndex 
   + transStereotypeIndex:dwFactor + genderFairnessIndex:dwFactor
   + participantGenderNum
   + participantAge
-  + (1|participantID)
+  + preregistered
+  #+ (1|participantID),
   + (1|cisStereotypeIndex) + (1|generalFairnessIndex),
   data = d,
   link = "probit"
 )
 summary(m)
+# only transStereotypeIndex is significant
 
-# plot the model output ----
+m <- clmm(
+  targetResponse ~ transStereotypeIndex 
+  + transStereotypeIndex:dwFactor 
+  + participantGenderNum
+  + participantAge
+  + preregistered
+  #+ (1|participantID),
+  + (1|cisStereotypeIndex) + (1|generalFairnessIndex),
+  data = d,
+  link = "probit"
+)
+summary(m)
+# transStereotypeIndex and interaction significant
+
+m <- clmm(
+  targetResponse ~ genderFairnessIndex 
+  + genderFairnessIndex:dwFactor 
+  + participantGenderNum
+  + participantAge
+  + preregistered
+  #+ (1|participantID),
+  + (1|cisStereotypeIndex) + (1|generalFairnessIndex),
+  data = d,
+  link = "probit"
+)
+summary(m)
+# genderFairnessIndex significant, interaction marginal
+
+# plot the model output (haven't adjusted this yet) ----
 
 library(ggeffects)
 library(ggplot2)
