@@ -429,10 +429,9 @@ ggplot(data=corr, aes(x=transStereotypeIndex, y=genderFairnessIndex,fill=dw)) +
   xlab("transStereotypeIndex") 
 ggsave("../graphs/correlation-of-main-predictors.pdf",height=4,width=4)
 
-
 # plots about all the predictors ----
 
-#### plot the data about preregistered (conservative or liberal) ----
+#### preregistered (conservative or liberal) ----
 
 # load the data 
 d = read_csv("../data/d.csv")
