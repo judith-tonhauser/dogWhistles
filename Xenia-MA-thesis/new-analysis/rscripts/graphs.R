@@ -345,7 +345,6 @@ ggplot(data=A, aes(x=transStereotypeIndex, y=count,fill=choice)) +
   xlab("Trans Stereotype Index") 
 ggsave("../graphs/1A-based-on-data-NEW.pdf",height=3,width=8)
 
-
 ##### plot the data to approximate Hurwitz & Peffley Fig 1B ----
 
 # load the data 
@@ -402,6 +401,36 @@ ggplot(data=B, aes(x=genderFairnessIndex, y=count,fill=choice)) +
   ylab("count") +
   xlab("genderFairnessIndex") 
 ggsave("../graphs/1B-based-on-data-NEW.pdf",height=3,width=8)
+
+# correlate the two main predictors, transStereotypeIndex and genderFairnessIndex ----
+
+# load the data 
+d = read_csv("../data/d.csv")
+nrow(d) #140
+
+# for every participant, get their transStereotypeIndex and genderFairnessIndex 
+# and the dw condition
+corr = d %>%
+  select(participantID,dw,transStereotypeIndex,genderFairnessIndex)
+corr
+
+cor(corr$transStereotypeIndex, corr$genderFairnessIndex)
+# 0.754904
+
+ggplot(data=corr, aes(x=transStereotypeIndex, y=genderFairnessIndex,fill=dw)) +
+  geom_point(shape=21,size=3) +
+  scale_fill_manual(values = c("no" = "black", "yes" = "#E69F00")) +
+  theme(legend.position="top") +
+  theme(axis.text.y = element_text(size=10)) +
+  scale_x_continuous(n.breaks = 5, limits=c(2,36)) +
+  scale_y_continuous(n.breaks = 5, limits=c(2,36)) +
+  #facet_grid(. ~ dw) +
+  ylab("genderFairnessIndex") +
+  xlab("transStereotypeIndex") 
+ggsave("../graphs/correlation-of-main-predictors.pdf",height=4,width=4)
+
+
+# plots about all the predictors ----
 
 #### plot the data about preregistered (conservative or liberal) ----
 
