@@ -153,7 +153,7 @@ ggsave("../graphs/1A-based-on-data.pdf",height=3,width=6)
 d = read_csv("../data/d.csv")
 nrow(d) #140
 
-# x-axis: genderFairnessIndex (4...23)
+# x-axis: genderFairnessIndex (4...23, the higher, the more the participant believes that trans people are treated less fairly than cis people)
 # y-axis: the proportion of participants who had that genderFairnessIndex score and
 # chose the prison response in the critical question
 # plot the proportion by dogwhistle/no dogwhistle
