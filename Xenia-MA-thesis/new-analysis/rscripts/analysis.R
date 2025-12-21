@@ -19,16 +19,32 @@ library(ordinal)
 d = read_csv("../data/d.csv")
 nrow(d) #140
 
-# make sure the variables have the write types
+# make sure the variables have the right types
 
 # targetResponse is the dependent variable (1-4)
 table(d$targetResponse)
 str(d$targetResponse) #needs to be an ordered factor
 d$targetResponse <- as.factor(d$targetResponse)
+levels(d$targetResponse) #now it is an ordered factor
+# 4: new prisons/feel very strongly, 1: education programs/feel very strongly
 
 # the two predictor variables are transStereotypeIndex and genderFairnessIndex
 str(d$transStereotypeIndex) #numeric
+table(d$transStereotypeIndex) # 5 (person doesn't accept the negative stereotypes) to 
+# 35 (person accepts the negative stereotypes)
 str(d$genderFairnessIndex) #numeric
+table(d$genderFairnessIndex) # 4 (person believes that transgender people are treated very unfairly)
+# to 23 (person believes that transgender people are treated very fairly)
+
+# mean center the two predictors
+d$transStereotypeIndex_c <- scale(d$transStereotypeIndex, center = TRUE, scale = FALSE) |> as.numeric()
+mean(d$transStereotypeIndex_c)
+
+d$genderFairnessIndex_c <- scale(d$genderFairnessIndex, center = TRUE, scale = FALSE) |> as.numeric()
+mean(d$genderFairnessIndex_c)
+
+d = d %>%
+  filter(participantSexualOrientation == "Straight or heterosexual")
 
 # the question frame is a factor, with no/0 and yes/1
 str(d$dw)
@@ -42,22 +58,153 @@ str(d$dwFactor)
 
 # fit the model ----
 m <- clmm(
-  targetResponse ~ transStereotypeIndex + genderFairnessIndex 
-  + transStereotypeIndex:dwFactor + genderFairnessIndex:dwFactor
-  + participantGenderNum
-  + participantAge
+  targetResponse ~ transStereotypeIndex_c + genderFairnessIndex_c 
+  + transStereotypeIndex_c:dwFactor + genderFairnessIndex_c:dwFactor
   + preregistered
-  #+ (1|participantID),
-  + (1|cisStereotypeIndex) + (1|generalFairnessIndex),
+  + participantGender # only two levels, so can't be random effect
+  + (1|cisStereotypeIndex) 
+  + (1|generalFairnessIndex)
+  + (1|equalityIndex)
+  + (1|participantAge)
+  #+ (1|participantSexualOrientation)
+  ,
   data = d,
-  link = "probit"
-)
+  link = "probit")
+
 summary(m)
 # only transStereotypeIndex is significant
+# the more the person accepts negative stereotypes about transgender people,
+# the more they are in favor of punitive measures
+
+# plot predicted probabilities ----
+
+# model <- clmm(response ~ A_c * C + B_c * C + (1 | subject), data = df)
+
+# Create a grid of values for prediction
+A_seq <- seq(min(df$A_c), max(df$A_c), length.out = 50)
+B_seq <- seq(min(df$B_c), max(df$B_c), length.out = 50)
+C_vals <- c(0, 1) # binary
+
+# Fix B at mean and vary A to visualize A*C interaction
+pred_grid_A <- expand.grid(
+  A_c = A_seq,
+  B_c = 0,       # mean-centered, so 0 = mean
+  C = C_vals
+)
+
+# Predict probabilities
+pred_probs_A <- predict(model, newdata = pred_grid_A, type = "prob")
+
+# Combine predictions with grid
+pred_grid_A <- cbind(pred_grid_A, pred_probs_A)
+
+# Convert to long format for ggplot
+pred_long_A <- pred_grid_A %>%
+  pivot_longer(cols = starts_with("Pr("), names_to = "Response", values_to = "Probability")
+
+# Plot predicted probabilities of outcome by A for C=0 vs C=1
+ggplot(pred_long_A, aes(x = A_c, y = Probability, color = as.factor(C), linetype = Response)) +
+  geom_line(size = 1) +
+  labs(
+    x = "A (mean-centered)",
+    y = "Predicted probability",
+    color = "C",
+    linetype = "Response category"
+  ) +
+  theme_minimal()
+You can do the same for B:
+  
+  r
+Copy code
+pred_grid_B <- expand.grid(
+  A_c = 0,       # mean-centered
+  B_c = B_seq,
+  C = C_vals
+)
+
+pred_probs_B <- predict(model, newdata = pred_grid_B, type = "prob")
+pred_grid_B <- cbind(pred_grid_B, pred_probs_B)
+
+pred_long_B <- pred_grid_B %>%
+  pivot_longer(cols = starts_with("Pr("), names_to = "Response", values_to = "Probability")
+
+ggplot(pred_long_B, aes(x = B_c, y = Probability, color = as.factor(C), linetype = Response)) +
+  geom_line(size = 1) +
+  labs(
+    x = "B (mean-centered)",
+    y = "Predicted probability",
+    color = "C",
+    linetype = "Response category"
+  ) +
+  theme_minimal()
+
+#Interpretation tip:
+# If the lines for C=0 vs C=1 are nearly overlapping for 
+# each response category, this confirms no meaningful interaction 
+# at typical levels of A or B.
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(gridExtra) # for arranging panels
+
+# -----------------------------
+# Step 1: Prepare prediction grids
+# -----------------------------
+A_seq <- seq(min(df$A_c), max(df$A_c), length.out = 50)
+B_seq <- seq(min(df$B_c), max(df$B_c), length.out = 50)
+C_vals <- c(0, 1)
+
+# Grid for A
+pred_grid_A <- expand.grid(A_c = A_seq, B_c = 0, C = C_vals)
+pred_probs_A <- predict(model, newdata = pred_grid_A, type = "prob")
+pred_grid_A <- cbind(pred_grid_A, pred_probs_A)
+pred_long_A <- pred_grid_A %>%
+  pivot_longer(cols = starts_with("Pr("), names_to = "Response", values_to = "Probability") %>%
+  mutate(Predictor = "A")
+
+# Grid for B
+pred_grid_B <- expand.grid(A_c = 0, B_c = B_seq, C = C_vals)
+pred_probs_B <- predict(model, newdata = pred_grid_B, type = "prob")
+pred_grid_B <- cbind(pred_grid_B, pred_probs_B)
+pred_long_B <- pred_grid_B %>%
+  pivot_longer(cols = starts_with("Pr("), names_to = "Response", values_to = "Probability") %>%
+  mutate(Predictor = "B")
+
+# Combine for plotting
+pred_long <- bind_rows(pred_long_A, pred_long_B)
+
+# -----------------------------
+# Step 2: Plot panels with consistent colors/line types
+# -----------------------------
+plot <- ggplot(pred_long, aes(x = ifelse(Predictor=="A", A_c, B_c),
+                              y = Probability,
+                              color = as.factor(C),
+                              linetype = Response)) +
+  geom_line(size = 1) +
+  facet_wrap(~Predictor, scales = "free_x", ncol = 2,
+             labeller = as_labeller(c(A="Predictor A", B="Predictor B"))) +
+  scale_color_manual(values = c("0" = "blue", "1" = "red"),
+                     labels = c("C = 0", "C = 1")) +
+  labs(
+    x = "Mean-centered predictor",
+    y = "Predicted probability",
+    color = "C",
+    linetype = "Response category"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "bottom",
+        strip.text = element_text(face = "bold"))
+
+# Display the combined figure
+print(plot)
+
+
+# end plot predicted probabilities ----
 
 m <- clmm(
-  targetResponse ~ transStereotypeIndex 
-  + transStereotypeIndex:dwFactor 
+  targetResponse ~ transStereotypeIndex_c 
+  + transStereotypeIndex_c:dwFactor 
   + participantGenderNum
   + participantAge
   + preregistered
@@ -70,8 +217,8 @@ summary(m)
 # transStereotypeIndex and interaction significant
 
 m <- clmm(
-  targetResponse ~ genderFairnessIndex 
-  + genderFairnessIndex:dwFactor 
+  targetResponse ~ genderFairnessIndex_c 
+  + genderFairnessIndex_c:dwFactor 
   + participantGenderNum
   + participantAge
   + preregistered

@@ -57,6 +57,8 @@ colnames(d)[1] <- "participantID" # rename the column
 d$participantID <- match(d$participantID, unique(d$participantID)) # assign unique IDs
 table(d$participantID)
 
+#view(d)
+
 # rename the columns
 colnames(d)[2] <- "feelStrongly"
 colnames(d)[3] <- "transConfused"
@@ -90,19 +92,19 @@ colnames(d)[26] <- "participantCisOrTrans"
 
 # recode, following H&P, the response to the critical question as a four-point scale
 # put together prison vs. education program question and feel strongly question as one single question
-# On a punitiveness scale, 1 represents people with the most punitive attitude
-# 4 represents people with the least punitive attitude
+# On a punitiveness scale, 4 represents people with the most punitive attitude
+# 1 represents people with the least punitive attitude
 d <- d %>%
   mutate(targetResponse = case_when(
-    criticalQuestion == "Building new prisons" & feelStrongly == "I feel very strongly about this." ~ 1,
-    criticalQuestion == "Building new prisons" & feelStrongly == "I feel not very strongly about this." ~ 2,
-    criticalQuestion == "Education programs" & feelStrongly == "I feel not very strongly about this." ~ 3,
-    criticalQuestion == "Education programs" & feelStrongly == "I feel very strongly about this." ~ 4,
+    criticalQuestion == "Building new prisons" & feelStrongly == "I feel very strongly about this." ~ 4,
+    criticalQuestion == "Building new prisons" & feelStrongly == "I feel not very strongly about this." ~ 3,
+    criticalQuestion == "Education programs" & feelStrongly == "I feel not very strongly about this." ~ 2,
+    criticalQuestion == "Education programs" & feelStrongly == "I feel very strongly about this." ~ 1,
     TRUE ~ 666 # Assign NA for any unmatched cases
   ))
 table(d$targetResponse)
 #1  2  3  4 
-#16 15 42 67
+#67 42 15 16
 
 # how many participants in each of the four target responses?
 d %>% 
@@ -112,11 +114,11 @@ d %>%
   summarize(count=n())
 
 # targetResponse count
-#       1    16
-#       2    15
-#       3    42
-#       4    67
-# the majority of the participants are towards less punitive (3 and 4)
+# 1              1    67
+# 2              2    42
+# 3              3    15
+# 4              4    16
+# the majority of the participants are towards less punitive (1 and 2)
 
 # predictor variable transStereotypeIndex ----
 
@@ -131,30 +133,41 @@ d <- d %>%
                                             transDangerous,
                                             transFrauds,
                                             transUnnatural)))
+table(d$transStereotypeIndex) #5 to 35
 
-
+#view(d)
 # predictor variable genderFairnessIndex ----
 
 # calculate each participant's gender fairness index (following H&P's racial fairness index from 4 to 23)
 # by summing up gender fairness apartment, sports, street harassment, and bullying after changing them to the appropriate values
-# 4 means the person believes that transgender people are treated very fairly
-# 23 means the person believes that transgender people are treated very unfairly
+# 4 means the person believes that transgender people are treated very unfairly
+# 23 means the person believes that transgender people are treated very fairly
 str(d$genderFairnessApartment) #chr change yes/no to 1/2
 d <- d %>%
   mutate(genderFairnessApartmentNum = case_when(
-    genderFairnessApartment == "Yes" ~ 1,
-    genderFairnessApartment == "No" ~ 2,
+    genderFairnessApartment == "Yes" ~ 1, # Yes, transgender people are treated less fairly than cisgender people
+    genderFairnessApartment == "No" ~ 2, # No
     TRUE ~ 666))
 
-str(d$genderFairnessSports) #num change 7-1 to 1-7
+# genderFairnessSports: Transgender experience discrimination in sports more than cisgender
+# how serious is this problem?
+# numbers from 1 (not a problem) to 7 (serious problem)
+str(d$genderFairnessSports) 
 table(d$genderFairnessSports)
+# reverse the coding so that 1 (serious problem) to 7 (not a problem)
 d$genderFairnessSports = 8-d$genderFairnessSports
 table(d$genderFairnessSports)
 
-str(d$genderFairnessStreetHarassment) #num change 7-1 to 1-7
+# genderFairnessStreetHarassment: Transgender experience street harassment more than cisgender
+# how serious is this problem?
+# numbers from 1 (not a problem) to 7 (serious problem)
+str(d$genderFairnessStreetHarassment) 
+# reverse the coding so that 1 (serious problem) to 7 (not a problem)
 d$genderFairnessStreetHarassment = 8-d$genderFairnessStreetHarassment
 
-str(d$genderFairnessBullying) #num change 7-1 to 1-7
+# genderFairnessBullying: Transgender youth experience more bullying than cisgender youth
+str(d$genderFairnessBullying) 
+# reverse the coding so that 1 (serious problem) to 7 (not a problem)
 d$genderFairnessBullying = 8-d$genderFairnessBullying
 
 d <- d %>%
@@ -185,15 +198,15 @@ d <- d %>%
 
 # calculate general fairness index (following H&P's general fairness score from 2 to 8)
 # by summing up general fairness education and healthcare
-# 2 means the person believes that people are treated very fairly and equally
-# 8 means the person believes that people are treated very unfairly and unequally
+# 2 means the person believes that people are treated very unfairly and unequally
+# 8 means the person believes that people are treated very fairly and equally
 str(d$generalFairnessEducation)
 d <- d %>%
   mutate(generalFairnessEducationNum = case_when(
-    generalFairnessEducation == "Strongly agree" ~ 1,
-    generalFairnessEducation == "Somewhat agree" ~ 2,
-    generalFairnessEducation == "Somewhat disagree" ~ 3,
-    generalFairnessEducation == "Strongly disagreee" ~ 4,
+    generalFairnessEducation == "Strongly agree" ~ 4,
+    generalFairnessEducation == "Somewhat agree" ~ 3,
+    generalFairnessEducation == "Somewhat disagree" ~ 2,
+    generalFairnessEducation == "Strongly disagreee" ~ 1,
     TRUE ~ 666))
 table(d$generalFairnessEducation)
 table(d$generalFairnessEducationNum)
@@ -201,10 +214,10 @@ table(d$generalFairnessEducationNum)
 str(d$generalFairnessHealthcare)
 d <- d %>%
   mutate(generalFairnessHealthcareNum = case_when(
-    generalFairnessHealthcare == "Strongly agree" ~ 1,
-    generalFairnessHealthcare == "Somewhat agree" ~ 2,
-    generalFairnessHealthcare == "Somewhat disagree" ~ 3,
-    generalFairnessHealthcare == "Strongly disagreee" ~ 4,
+    generalFairnessHealthcare == "Strongly agree" ~ 4,
+    generalFairnessHealthcare == "Somewhat agree" ~ 3,
+    generalFairnessHealthcare == "Somewhat disagree" ~ 2,
+    generalFairnessHealthcare == "Strongly disagreee" ~ 1,
     TRUE ~ 666))
 table(d$generalFairnessHealthcare)
 table(d$generalFairnessHealthcareNum)
@@ -228,19 +241,19 @@ table(d$generalFairnessIndex)
 # but are using these two numbers separately
 
 # moreTransPeopleIndex
-# 3 means the person is highly aware of trans people and issues
-# 1 means the person is highly unaware of trans people and issues
-# the higher the score, the more aware the person is of trans people and issues
+# 1 means the person is highly aware of trans people and issues
+# 3 means the person is highly unaware of trans people and issues
+# the higher the score, the less aware the person is of trans people and issues
 str(d$fearNumberTrans) 
 d <- d %>%
   mutate(moreTransPeopleIndex = case_when(
-    fearNumberTrans == "The number of trans people increased" ~ 3,
+    fearNumberTrans == "The number of trans people increased" ~ 1,
     fearNumberTrans == "The number of trans people stayed about the same" ~ 2,
-    fearNumberTrans == "The number of trans people decreased" ~ 1,
+    fearNumberTrans == "The number of trans people decreased" ~ 3,
     TRUE ~ 666))
 table(d$moreTransPeopleIndex)
 # 1   2   3 
-# 2  27 111 
+# 111  27   2
 # most participants believe that there are now more trans people
 
 #### fearComparisonProblemsIndex ----
@@ -267,8 +280,8 @@ table(d$fearComparisonProblemsIndex)
 
 # calculate equality index (following H&P's equality index from 2 to 8)
 # by summing up qualityEqualChance and equalityShouldntWorry
-# 2 means the person doesn't care about fairness and equality at all
-# 8 means the person cares about fairness and equality very much
+# 2 means the person cares about fairness and equality very much
+# 8 means the person doesn't care about fairness and equality at all
 # the higher this index, the more the person cares about fairness and equality
 # equalityEqualChance is ambiguous: strongly disagreeing can either mean the person doesn't think it's a big problem 
 # or the person doesn't think inequality exists
@@ -276,36 +289,32 @@ table(d$fearComparisonProblemsIndex)
 str(d$equalityEqualChance) #chr change to num 4-1
 d <- d %>%
   mutate(equalityEqualChanceNum = case_when(
-    equalityEqualChance == "Strongly agree" ~ 4,
-    equalityEqualChance == "Somewhat agree" ~ 3,
-    equalityEqualChance == "Somewhat disagree" ~ 2,
-    equalityEqualChance == "Strongly disagree" ~ 1,
+    equalityEqualChance == "Strongly agree" ~ 1,
+    equalityEqualChance == "Somewhat agree" ~ 2,
+    equalityEqualChance == "Somewhat disagree" ~ 3,
+    equalityEqualChance == "Strongly disagree" ~ 4,
     TRUE ~ 666))
 table(d$equalityEqualChance)
 table(d$equalityEqualChanceNum)
-# 1  2  3  4 
-# 25 23 38 54 
 
 str(d$equalityShouldntWorry) #chr change to num 1-4
 d <- d %>%
   mutate(equalityShouldntWorryNum = case_when(
-    equalityShouldntWorry == "Strongly agree" ~ 1,
-    equalityShouldntWorry == "Somewhat agree" ~ 2,
-    equalityShouldntWorry == "Somewhat disagree" ~ 3,
-    equalityShouldntWorry == "Strongly disagree" ~ 4,
+    equalityShouldntWorry == "Strongly agree" ~ 4,
+    equalityShouldntWorry == "Somewhat agree" ~ 3,
+    equalityShouldntWorry == "Somewhat disagree" ~ 2,
+    equalityShouldntWorry == "Strongly disagree" ~ 1,
     TRUE ~ 666))
 table(d$equalityShouldntWorry)
 table(d$equalityShouldntWorryNum)
-# 1  2  3  4 
-# 18 23 37 62 
 
 d <- d %>%
   mutate(equalityIndex = rowSums(select(., 
                                         equalityEqualChanceNum,
                                         equalityShouldntWorryNum)))
 table(d$equalityIndex)
-#  2  3  4  5  6  7  8 
-# 11 13 11 19 22 20 44 
+# 2  3  4  5  6  7  8 
+# 44 20 22 19 11 13 11
 
 #### additional control variables ----
 
@@ -336,6 +345,7 @@ table(d$participantGenderNum)
 
 # H&P: age
 table(d$participantAge)
+str(d$participantAge)
 
 # H&P: income
 # not collected
